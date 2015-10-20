@@ -31,6 +31,10 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_ttf.h>
+#ifdef ALLEGRO_MACOSX
+#include <mach-o/dyld.h>
+#include <sys/param.h>
+#endif
 #include "utils.h"
 #include "config.h"
 #include "main.h"
@@ -79,6 +83,16 @@ int main(int argc, char **argv){
 
 	al_set_org_name("Super Derpy");
     al_set_app_name("Back to the Browser Wars");
+
+       #ifdef ALLEGRO_MACOSX
+       char exe_path[MAXPATHLEN];
+       char link_path[MAXPATHLEN];
+
+       uint32_t size = sizeof(exe_path);
+       _NSGetExecutablePath(exe_path, &size);
+       realpath(exe_path, link_path);
+       chdir(link_path);
+       #endif
 
 	if(!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");

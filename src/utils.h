@@ -24,6 +24,8 @@
 
 #ifdef ALLEGRO_WINDOWS
 #define LIBRARY_EXTENTION ".dll"
+#elseif ALLEGRO_MACOSX
+#define LIBRARY_EXTENTION ".dylib"
 #else
 #define LIBRARY_EXTENTION ".so"
 #endif

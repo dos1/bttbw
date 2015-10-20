@@ -4,7 +4,6 @@ project(BTTBW C)
 
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -g -std=c99")
 if(APPLE)
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fnested-functions")
   if(CMAKE_INSTALL_PREFIX MATCHES "/usr/local")
     set(CMAKE_INSTALL_PREFIX "/Applications")
     set(BIN_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}")
