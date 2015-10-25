@@ -2,8 +2,8 @@
 Type=Application
 Version=1.0
 Name=Back to the Browser Wars
-Exec=ticklemonster
+Exec=bttbw
 Comment=Send Internet Explorer back in time!
-Icon=ticklemonster
+Icon=bttbw
 Terminal=false
 Categories=Game;ArcadeGame;
