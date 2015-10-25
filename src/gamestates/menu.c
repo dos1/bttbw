@@ -133,11 +133,7 @@ void DrawMenuState(struct Game *game, struct MenuResources *data) {
 void ChangeMenuState(struct Game *game, struct MenuResources* data, enum menustate_enum state) {
     data->menustate=state;
     data->selected=0;
-    if (state == MENUSTATE_HIDDEN) {
-        al_set_sample_instance_gain(game->muzyczka.instance.fg, 0.0);
-    } else {
-        al_set_sample_instance_gain(game->muzyczka.instance.fg, 1.5);
-    }
+
     PrintConsole(game, "menu state changed %d", state);
 }
 
@@ -276,9 +272,6 @@ void StartGame(struct Game *game, struct MenuResources *data) {
         game->mediator.modificator = 0.9756;
 
     ChangeMenuState(game,data,MENUSTATE_HIDDEN);
-    al_set_sample_instance_gain(game->muzyczka.instance.drums, 0.0);
-    al_set_sample_instance_gain(game->muzyczka.instance.fg, 1.5);
-    al_set_sample_instance_gain(game->muzyczka.instance.bg, 1.5);
     data->starting = true;
 }
 
@@ -298,7 +291,7 @@ void Gamestate_Start(struct Game *game, struct MenuResources* data) {
     al_play_sample_instance(game->muzyczka.instance.fg);
     al_play_sample_instance(game->muzyczka.instance.bg);
     al_play_sample_instance(game->muzyczka.instance.drums);
-    al_set_sample_instance_gain(game->muzyczka.instance.fg, 0.0);
+    al_set_sample_instance_gain(game->muzyczka.instance.fg, 1.0);
     al_set_sample_instance_gain(game->muzyczka.instance.bg, 1.5);
     al_set_sample_instance_gain(game->muzyczka.instance.drums, 1.5);
 

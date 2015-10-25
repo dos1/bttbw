@@ -51,9 +51,6 @@ void Gamestate_Draw(struct Game *game, struct dosowiskoResources* data) {
 }
 
 void Gamestate_Start(struct Game *game, struct dosowiskoResources* data) {
-    al_set_sample_instance_gain(game->muzyczka.instance.drums, 0.0);
-    al_set_sample_instance_gain(game->muzyczka.instance.fg, 0.0);
-    al_set_sample_instance_gain(game->muzyczka.instance.bg, 1.5);
 
     char *end = "";
     data->score = strtol(GetConfigOptionDefault(game, "Mediator", "score", "0"), &end, 10);

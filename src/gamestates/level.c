@@ -196,6 +196,8 @@ void Gamestate_Logic(struct Game *game, struct RocketsResources* data) {
 
     if (data->counter <= 0) {
         data->lost = true;
+        al_play_sample_instance(data->atom_sound);
+
         TM_AddDelay(data->timeline, 3000);
         TM_AddAction(data->timeline, theEnd, NULL, "theEnd");
         game->mediator.score = (data->maxscore / (float)data->timelimit) * 100;
