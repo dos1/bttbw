@@ -32,7 +32,7 @@ struct Rocket* CreateRocket(struct Game *game, struct RocketsResources* data, st
     struct Rocket *n = malloc(sizeof(struct Rocket));
     n->next = NULL;
     n->prev = NULL;
-    n->dx = (right ? -2.5 : 2.5) + (rand() / (float)RAND_MAX) * 0.6 - 0.3;
+    n->dx = (right ? -2.5 : 2.5) + (rand() / (float)RAND_MAX) * 2 - 1;
     n->dy = 0;
     n->modifier = 0.025;
     n->blown = false;
@@ -43,7 +43,7 @@ struct Rocket* CreateRocket(struct Game *game, struct RocketsResources* data, st
     SetCharacterPosition(game, n->character, right ? 320 : -10, (rand() / (float)RAND_MAX) * 160 + 10, 0);
     al_play_sample_instance(data->jump_sound);
 
-    data->currentspawn = data->spawnspeed - (data->spawnspeed * 0.2) * (float)(rand() / (float)RAND_MAX * 2) - (data->spawnspeed * 0.05);
+    data->currentspawn = data->spawnspeed - (data->spawnspeed * 0.2) * (float)(rand() / (float)RAND_MAX * 2) - (data->spawnspeed * 0.15);
 
     if (rockets) {
         struct Rocket *tmp = rockets;
@@ -107,7 +107,7 @@ void UpdateRockets(struct Game *game, struct RocketsResources *data, struct Rock
     while (tmp) {
         //tmp->dy+= tmp->modifier;
         if (!tmp->blown) {
-            tmp->dx+= (tmp->dx > 0) ? (-tmp->modifier / 5 + 0.001) : (tmp->modifier / 5 - 0.001);
+            //tmp->dx+= (tmp->dx > 0) ? (-tmp->modifier / 5 + 0.001) : (tmp->modifier / 5 - 0.001);
         }
         MoveCharacter(game, tmp->character, tmp->dx, tmp->dy, 0);
         AnimateCharacter(game, tmp->character, 1);
@@ -115,7 +115,7 @@ void UpdateRockets(struct Game *game, struct RocketsResources *data, struct Rock
         if (!tmp->blown) {
 
                         if (CheckCollision(game, data, data->cursor, tmp->character)) {
-                            data->counter -= 400;
+                            data->counter -= 500;
 
                             tmp->blown = true;
                             tmp->modifier = 0;
@@ -203,7 +203,7 @@ void Gamestate_Logic(struct Game *game, struct RocketsResources* data) {
     }
 
     if (!data->lost) {
-        data->counter+= 2;
+        data->counter+= 1;
     }
     data->spawncounter++;
     data->cloud_rotation += 0.002;
@@ -304,6 +304,7 @@ void Gamestate_Start(struct Game *game, struct RocketsResources* data) {
 void Gamestate_ProcessEvent(struct Game *game, struct RocketsResources* data, ALLEGRO_EVENT *ev) {
     TM_HandleEvent(data->timeline, ev);
 	if ((ev->type==ALLEGRO_EVENT_KEY_DOWN) && (ev->keyboard.keycode == ALLEGRO_KEY_ESCAPE)) {
+            game->mediator.score = (data->maxscore / (float)data->timelimit) * 100;
                 SwitchGamestate(game, "level", "theend");
     } else if (ev->type == ALLEGRO_EVENT_MOUSE_AXES) {
         int mousex = ev->mouse.x / (al_get_display_width(game->display) / 320);
