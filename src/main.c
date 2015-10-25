@@ -78,7 +78,7 @@ int main(int argc, char **argv){
 	srand(time(NULL));
 
 	al_set_org_name("Super Derpy");
-    al_set_app_name("Mediator");
+    al_set_app_name("Back to the Browser Wars");
 
 	if(!al_init()) {
 		fprintf(stderr, "failed to initialize allegro!\n");
@@ -163,8 +163,8 @@ int main(int argc, char **argv){
 
 	PrintConsole(&game, "Viewport %dx%d", game.viewport.width, game.viewport.height);
 
-    ALLEGRO_BITMAP *icon = al_load_bitmap(GetDataFilePath(&game, "icons/ticklemonster.png"));
-	al_set_window_title(game.display, "Tickle Monster vs Suits");
+    ALLEGRO_BITMAP *icon = al_load_bitmap(GetDataFilePath(&game, "icons/bttbw.png"));
+	al_set_window_title(game.display, "Back to the Browser Wars");
 	al_set_display_icon(game.display, icon);
 	al_destroy_bitmap(icon);
 
@@ -244,14 +244,12 @@ int main(int argc, char **argv){
 		}
 
 	LoadGamestate(&game, gamestate);
-    LoadGamestate(&game, "burndt");
     game._priv.gamestates->showLoading = false; // we have only one gamestate right now
-    game._priv.gamestates->next->showLoading = false; // well, now two
     StartGamestate(&game, gamestate);
 	free(gamestate);
 
 	char libname[1024] = {};
-    snprintf(libname, 1024, "libsuperderpy-%s-loading" LIBRARY_EXTENTION, "mediator");
+    snprintf(libname, 1024, "libsuperderpy-%s-loading" LIBRARY_EXTENTION, "bttbw");
 	void *handle = dlopen(libname, RTLD_NOW);
 	if (!handle) {
 		FatalError(&game, true, "Error while initializing loading screen %s", dlerror());
@@ -313,7 +311,7 @@ int main(int argc, char **argv){
 					al_stop_timer(game._priv.timer);
 					// TODO: take proper game name
 					char libname[1024];
-                    snprintf(libname, 1024, "libsuperderpy-%s-%s" LIBRARY_EXTENTION, "mediator", tmp->name);
+                    snprintf(libname, 1024, "libsuperderpy-%s-%s" LIBRARY_EXTENTION, "bttbw", tmp->name);
 					tmp->handle = dlopen(libname,RTLD_NOW);
 					if (!tmp->handle) {
 						//PrintConsole(&game, "Error while loading gamestate \"%s\": %s", tmp->name, dlerror());

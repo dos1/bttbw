@@ -38,10 +38,10 @@ void Gamestate_Logic(struct Game *game, struct dosowiskoResources* data) {
 void Gamestate_Draw(struct Game *game, struct dosowiskoResources* data) {
     al_draw_bitmap(data->bitmap, 0, 0, 0);
     char text[255];
-    snprintf(text, 255, "%d", game->mediator.score);
-    DrawTextWithShadow(game->_priv.font, al_map_rgb(255,255,255), 320/2, 20, ALLEGRO_ALIGN_CENTER, "Score:");
+    snprintf(text, 255, "%d%%", game->mediator.score);
+    DrawTextWithShadow(game->_priv.font, al_map_rgb(255,255,255), 320/2, 20, ALLEGRO_ALIGN_CENTER, "Max market share:");
 		DrawTextWithShadow(data->font, al_map_rgb(255,255,255), 320/2, 30, ALLEGRO_ALIGN_CENTER, text);
-    snprintf(text, 255, "High score: %d", data->score);
+    snprintf(text, 255, "High score: %d%%", data->score);
 		if (game->mediator.score == data->score) {
 			DrawTextWithShadow(game->_priv.font, al_map_rgb(255,222, 120), 320/2, 140, ALLEGRO_ALIGN_CENTER, text);
 		} else {
@@ -60,7 +60,7 @@ void Gamestate_Start(struct Game *game, struct dosowiskoResources* data) {
 
     if (game->mediator.score > data->score) {
         char text[255];
-        snprintf(text, 255, "%d", game->mediator.score);
+        snprintf(text, 255, "%d%%", game->mediator.score);
         SetConfigOption(game, "Mediator", "score", text);
 				data->score = game->mediator.score;
     }

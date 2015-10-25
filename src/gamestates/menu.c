@@ -41,7 +41,7 @@ void About(struct Game *game, struct MenuResources* data) {
     al_set_target_backbuffer(game->display);
     al_clear_to_color(al_map_rgb(0,0,170));
 
-    char *header = "MEDIATOR";
+    char *header = "BACK TO THE BROWSER WARS";
 
     al_draw_filled_rectangle(al_get_display_width(game->display)/2 - al_get_text_width(game->_priv.font_bsod, header)/2 - 4, (int)(al_get_display_height(game->display) * 0.32), 4 + al_get_display_width(game->display)/2 + al_get_text_width(game->_priv.font_bsod, header)/2, (int)(al_get_display_height(game->display) * 0.32) + al_get_font_line_height(game->_priv.font_bsod), al_map_rgb(170,170,170));
 
@@ -53,7 +53,7 @@ void About(struct Game *game, struct MenuResources* data) {
     al_draw_textf(game->_priv.font_bsod, al_map_rgb(255,255,255), al_get_display_width(game->display)/2 - al_get_text_width(game->_priv.font_bsod, header2)/2, (int)(al_get_display_height(game->display) * 0.32+3*al_get_font_line_height(game->_priv.font_bsod)*1.25), ALLEGRO_ALIGN_LEFT, "%p and system just doesn't know what went wrong.", (void*)game);
 
     al_draw_text(game->_priv.font_bsod, al_map_rgb(255,255,255), al_get_display_width(game->display)/2, (int)(al_get_display_height(game->display) * 0.32+5*al_get_font_line_height(game->_priv.font_bsod)*1.25), ALLEGRO_ALIGN_CENTRE, 	"About screen not implemented!");
-    al_draw_text(game->_priv.font_bsod, al_map_rgb(255,255,255), al_get_display_width(game->display)/2, (int)(al_get_display_height(game->display) * 0.32+7*al_get_font_line_height(game->_priv.font_bsod)*1.25), ALLEGRO_ALIGN_CENTRE, 	"Made in the theater by Sebastian Krzyszkowiak and Konrad Burandt");
+    al_draw_text(game->_priv.font_bsod, al_map_rgb(255,255,255), al_get_display_width(game->display)/2, (int)(al_get_display_height(game->display) * 0.32+7*al_get_font_line_height(game->_priv.font_bsod)*1.25), ALLEGRO_ALIGN_CENTRE, 	"Made for 0h Game Jam 2015 by Sebastian Krzyszkowiak");
 
     al_draw_text(game->_priv.font_bsod, al_map_rgb(255,255,255), al_get_display_width(game->display)/2 - al_get_text_width(game->_priv.font_bsod, header2)/2, (int)(al_get_display_height(game->display) * 0.32+9*al_get_font_line_height(game->_priv.font_bsod)*1.25), ALLEGRO_ALIGN_LEFT, "* Press any key to terminate this error.");
     al_draw_text(game->_priv.font_bsod, al_map_rgb(255,255,255), al_get_display_width(game->display)/2 - al_get_text_width(game->_priv.font_bsod, header2)/2, (int)(al_get_display_height(game->display) * 0.32+10*al_get_font_line_height(game->_priv.font_bsod)*1.25), ALLEGRO_ALIGN_LEFT, "* Press any key to destroy all muffins in the world.");
@@ -70,7 +70,7 @@ void DrawMenuState(struct Game *game, struct MenuResources *data) {
     ALLEGRO_TRANSFORM trans, cur_trans;
     al_copy_transform(&trans, tmp_trans);
     al_copy_transform(&cur_trans, tmp_trans);
-    al_translate_transform(&trans, (al_get_display_width(game->display) / 320.0) * 80, (al_get_display_height(game->display) / 260.0) * ((180-data->screen_pos) - 48));
+    al_translate_transform(&trans, (al_get_display_width(game->display) / 320.0), (al_get_display_height(game->display) / 260.0) * ((180-data->screen_pos) - 48));
     al_use_transform(&trans);
 
     ALLEGRO_FONT *font = data->font;
@@ -147,8 +147,8 @@ void Gamestate_Draw(struct Game *game, struct MenuResources* data) {
 
     al_clear_to_color(al_map_rgb(3, 213, 255));
 
-    al_draw_bitmap(data->bg, 0, 0, 0);
-    al_draw_bitmap(data->monster, data->monster_pos, 10, 0);
+    al_draw_tinted_bitmap(data->bg,al_map_rgb(60,200,78), 0, 0, 0);
+    //al_draw_bitmap(data->monster, data->monster_pos, 10, 0);
     if (!data->starting) {
         al_draw_bitmap(data->title, 12, 25 - (pow(sin(data->title_pos), 2) * 16) - data->screen_pos, 0);
     }
@@ -172,9 +172,7 @@ void Gamestate_Logic(struct Game *game, struct MenuResources* data) {
             data->starting = false;
             LoadGamestate(game, "theend");
             LoadGamestate(game, "info");
-            LoadGamestate(game, "rockets");
-            LoadGamestate(game, "riots");
-            LoadGamestate(game, "lollipop");
+            LoadGamestate(game, "level");
             StartGamestate(game, "info");
             StopGamestate(game, "menu");
         }

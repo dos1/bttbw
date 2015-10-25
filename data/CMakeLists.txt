@@ -1,12 +1,12 @@
-SET(DATADIR "${SHARE_INSTALL_PREFIX}/mediator/data")
+SET(DATADIR "${SHARE_INSTALL_PREFIX}/bttbw/data")
 
 if(APPLE)
-  SET(DATADIR "${BIN_INSTALL_DIR}/mediator.app/Contents/Resources/data") #OMG NASTY
+  SET(DATADIR "${BIN_INSTALL_DIR}/bttbw.app/Contents/Resources/data") #OMG NASTY
 endif(APPLE)
 
 add_subdirectory(icons)
 if(UNIX AND NOT APPLE)
-  install(FILES mediator.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+  install(FILES bttbw.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 endif(UNIX AND NOT APPLE)
 install(DIRECTORY sprites DESTINATION ${DATADIR})
 install(DIRECTORY fonts DESTINATION ${DATADIR})

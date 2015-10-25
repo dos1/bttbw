@@ -55,7 +55,7 @@ bool FadeOut(struct Game *game, struct TM_Action *action, enum TM_ActionState st
 }
 
 bool End(struct Game *game, struct TM_Action *action, enum TM_ActionState state) {
-    if (state == TM_ACTIONSTATE_RUNNING) SwitchGamestate(game, "dosowisko", "burndt");
+    if (state == TM_ACTIONSTATE_RUNNING) SwitchGamestate(game, "dosowisko", "menu");
 	return true;
 }
 

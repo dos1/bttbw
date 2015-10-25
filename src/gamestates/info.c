@@ -34,12 +34,12 @@ int Gamestate_ProgressCount = 1;
 void Gamestate_Logic(struct Game *game, struct dosowiskoResources* data) {
     data->tick++;
 		if (data->tick > 86) {
-        SwitchGamestate(game, "info", "lollipop");
+        SwitchGamestate(game, "info", "level");
     }
 }
 
 void Gamestate_Draw(struct Game *game, struct dosowiskoResources* data) {
-    al_draw_bitmap(data->bitmap, 0, 0, 0);
+    al_draw_tinted_bitmap(data->bitmap, al_map_rgb(86, 64, 250), 0, 0, 0);
 		if ((data->tick / 11) % 2 == 0) {
 				al_draw_bitmap(data->icon, 320 / 2 - al_get_bitmap_width(data->icon) / 2, 180 / 2 - al_get_bitmap_height(data->icon) / 2 , 0);
     }
@@ -55,10 +55,10 @@ void Gamestate_Start(struct Game *game, struct dosowiskoResources* data) {
 void Gamestate_ProcessEvent(struct Game *game, struct dosowiskoResources* data, ALLEGRO_EVENT *ev) {
     //TM_HandleEvent(data->timeline, ev);
 	if ((ev->type==ALLEGRO_EVENT_KEY_DOWN) && (ev->keyboard.keycode == ALLEGRO_KEY_ESCAPE)) {
-        SwitchGamestate(game, "info", "lollipop");
+        SwitchGamestate(game, "info", "level");
 	}
     if ((ev->type==ALLEGRO_EVENT_KEY_DOWN) && (ev->keyboard.keycode == ALLEGRO_KEY_ENTER)) {
-        SwitchGamestate(game, "info", "lollipop");
+        SwitchGamestate(game, "info", "level");
     }
 }
 

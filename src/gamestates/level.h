@@ -47,5 +47,10 @@ struct RocketsResources {
 
         int timelimit, spawnspeed, currentspawn, spawncounter;
 
+        int maxscore;
+
+        int colorcounter;
+        ALLEGRO_COLOR color;
+
 		struct Timeline *timeline;
 };

@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
 Version=1.0
-Name=Tickle Monster vs Suits
+Name=Back to the Browser Wars
 Exec=ticklemonster
-Comment=Who's got tickles?
+Comment=Send Internet Explorer back in time!
 Icon=ticklemonster
 Terminal=false
 Categories=Game;ArcadeGame;

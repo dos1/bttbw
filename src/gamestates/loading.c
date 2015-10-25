@@ -42,7 +42,7 @@ void* Load(struct Game *game) {
 
 	al_set_target_bitmap(data->loading_bitmap);
 	al_clear_to_color(al_map_rgb(0,0,0));
-	al_draw_bitmap(data->bg, 0, 0, 0);
+    al_draw_tinted_bitmap(data->bg, al_map_rgb(255, 128, 0), 0, 0, 0);
 	al_draw_filled_rectangle(0, game->viewport.height/2 - 1, game->viewport.width, game->viewport.height/2 + 1, al_map_rgba(32,32,32,32));
 	al_set_target_bitmap(al_get_backbuffer(game->display));
 	return data;
