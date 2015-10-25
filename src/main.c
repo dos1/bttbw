@@ -464,7 +464,7 @@ int main(int argc, char **argv){
 			} else if ((ev.type == ALLEGRO_EVENT_KEY_DOWN) && (game.config.debug) && (ev.keyboard.keycode == ALLEGRO_KEY_F12)) {
 				ALLEGRO_PATH *path = al_get_standard_path(ALLEGRO_USER_DOCUMENTS_PATH);
 				char filename[255] = { };
-				snprintf(filename, 255, "TickleMonster_%ld_%ld.png", time(NULL), clock());
+				snprintf(filename, 255, "BTTBW_%ld_%ld.png", time(NULL), clock());
 				al_set_path_filename(path, filename);
 				al_save_bitmap(al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP), al_get_backbuffer(game.display));
 				PrintConsole(&game, "Screenshot stored in %s", al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP));
